@@ -16,6 +16,7 @@ class MainViewController: UITableViewController {
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = 90
     }
 
     // MARK: - Table view data source
@@ -28,11 +29,11 @@ class MainViewController: UITableViewController {
         var content = cell.defaultContentConfiguration()
 
         // Configure content.
-//      content.image = UIImage(systemName: "star")
+//      content.image = UIImage(systemName: restaurantNames[indexPath.row])
         content.text = restaurantNames[indexPath.row]
+        content.image = UIImage(named: restaurantNames[indexPath.row])
 
         // Customize appearance.
-//      content.imageProperties.tintColor = .purple
         cell.contentConfiguration = content
         return cell
     }
