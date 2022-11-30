@@ -16,7 +16,7 @@ class MainViewController: UITableViewController {
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 90
+        tableView.rowHeight = 120
     }
 
     // MARK: - Table view data source
@@ -27,20 +27,23 @@ class MainViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         var content = cell.defaultContentConfiguration()
-
-        // Configure content.
-//      content.image = UIImage(systemName: restaurantNames[indexPath.row])
-        content.text = restaurantNames[indexPath.row]
-        content.image = UIImage(named: restaurantNames[indexPath.row])
-
-        // Customize appearance.
+        let places = restaurantNames[indexPath.row]
+        content.text = places
+        content.image = UIImage(named: places)
+        content.imageProperties.cornerRadius = tableView.rowHeight / 2
         cell.contentConfiguration = content
         return cell
     }
 
+//    устарел и неявно конфликтует с var content
+// альтернатива использовать tableView.rowHeight = 120 в viewDidLoad()
+//    //MARK: - Table View Delegate
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 110
+//    }
+    
     /*
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
