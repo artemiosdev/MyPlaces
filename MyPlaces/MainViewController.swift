@@ -18,36 +18,35 @@ class MainViewController: UITableViewController {
         super.viewDidLoad()
         tableView.rowHeight = 120
     }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return restaurantNames.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        var content = cell.defaultContentConfiguration()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         let places = restaurantNames[indexPath.row]
-        content.text = places
-        content.image = UIImage(named: places)
-        content.imageProperties.cornerRadius = tableView.rowHeight / 2
-        cell.contentConfiguration = content
+        cell.nameLabel.text = places
+        cell.imageOfPlace.image = UIImage(named: places)
+        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
+        cell.imageOfPlace.clipsToBounds = true
         return cell
     }
-
-//    устарел и неявно конфликтует с var content
-// альтернатива использовать tableView.rowHeight = 120 в viewDidLoad()
-//    //MARK: - Table View Delegate
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 110
-//    }
+    
+    //    устарел и неявно конфликтует с var content
+    // альтернатива использовать tableView.rowHeight = 120 в viewDidLoad()
+    //    //MARK: - Table View Delegate
+    //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //        return 110
+    //    }
     
     /*
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }
