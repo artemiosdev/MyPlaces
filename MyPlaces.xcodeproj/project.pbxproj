@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD3393382939EF3E004179BD /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3393372939EF3E004179BD /* PlaceModel.swift */; };
 		DD50B453293915AB0089131A /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50B452293915AB0089131A /* CustomTableViewCell.swift */; };
 		DD53628529351634009A19FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53628429351634009A19FF /* AppDelegate.swift */; };
 		DD53628729351634009A19FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53628629351634009A19FF /* SceneDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD3393372939EF3E004179BD /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		DD50B452293915AB0089131A /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		DD53628129351634009A19FF /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD53628429351634009A19FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,8 +62,9 @@
 			children = (
 				DD53628429351634009A19FF /* AppDelegate.swift */,
 				DD53628629351634009A19FF /* SceneDelegate.swift */,
-				DD5362982935345C009A19FF /* MainViewController.swift */,
 				DD50B452293915AB0089131A /* CustomTableViewCell.swift */,
+				DD5362982935345C009A19FF /* MainViewController.swift */,
+				DD3393372939EF3E004179BD /* PlaceModel.swift */,
 				DD53628A29351634009A19FF /* Main.storyboard */,
 				DD53628D29351636009A19FF /* Assets.xcassets */,
 				DD53628F29351636009A19FF /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 			files = (
 				DD5362992935345C009A19FF /* MainViewController.swift in Sources */,
 				DD53628529351634009A19FF /* AppDelegate.swift in Sources */,
+				DD3393382939EF3E004179BD /* PlaceModel.swift in Sources */,
 				DD50B453293915AB0089131A /* CustomTableViewCell.swift in Sources */,
 				DD53628729351634009A19FF /* SceneDelegate.swift in Sources */,
 			);
