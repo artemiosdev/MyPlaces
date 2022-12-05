@@ -235,7 +235,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Place" id="dsb-fb-FfI">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cOu-zK-9gz"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cOu-zK-9gz">
+                            <connections>
+                                <action selector="cancelAction:" destination="WuX-aF-bW3" id="g1j-eb-Vc7"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="qPx-eq-lQ4">
                             <connections>
                                 <segue destination="mFa-ei-2rx" kind="unwind" unwindAction="unwindSegue:" id="pH1-Gb-HPE"/>

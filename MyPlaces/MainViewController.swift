@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
-    let places = Place.getPlaces()
+    var places = Place.getPlaces()
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 120
@@ -26,7 +26,11 @@ class MainViewController: UITableViewController {
         cell.nameLabel.text = place.name
         cell.locationLabel.text = place.location
         cell.typeLabel.text = place.type
-        cell.imageOfPlace.image = UIImage(named: place.restaurantImage!)
+        if place.image == nil {
+            cell.imageOfPlace.image = UIImage(named: place.restaurantImage!)
+        } else {
+            cell.imageOfPlace.image = place.image
+        }
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
         cell.imageOfPlace.clipsToBounds = true
         return cell
@@ -43,5 +47,10 @@ class MainViewController: UITableViewController {
     
     // выход по нажатию на Cancel в окне добавления
     // ранее этот метод назывался cancelAction
-    @IBAction func unwindSegue(_ segue: UIStoryboardSegue) { }
+    @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+        guard let newPlaceVC = segue.source as? NewPlaceViewController else { return }
+        newPlaceVC.saveNewPlace()
+        places.append(newPlaceVC.newPlace!)
+        tableView.reloadData()
+    }
 }

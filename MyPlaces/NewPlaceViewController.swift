@@ -9,6 +9,7 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController {
     var newPlace: Place?
+    var imageIsChanged = false
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var placeName: UITextField!
@@ -41,7 +42,7 @@ class NewPlaceViewController: UITableViewController {
             }
             photo.setValue(photoIcon, forKey: "image")
             photo.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
-
+            
             let cancel = UIAlertAction(title: "Cancel", style: .cancel)
             actionSheet.addAction(camera)
             actionSheet.addAction(cancel)
@@ -52,9 +53,21 @@ class NewPlaceViewController: UITableViewController {
             view.endEditing(true)
         }
         
-        func saveNewPlace() {
-            newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, image: placeImage.image, restaurantImage: nil)
+    }
+    
+    func saveNewPlace() {
+        var image: UIImage?
+        
+        if imageIsChanged {
+            image = placeImage.image
+        } else {
+            image = #imageLiteral(resourceName: "imagePlaceholder")
         }
+        newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, image: image, restaurantImage: nil)
+    }
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        dismiss(animated: true)
     }
     
     
@@ -96,6 +109,7 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         placeImage.contentMode = .scaleAspectFill
         // обрезка по границе изображения
         placeImage.clipsToBounds = true
+        imageIsChanged = true
         // закрывает данный метод
         dismiss(animated: true)
     }
