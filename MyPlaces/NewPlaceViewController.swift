@@ -9,6 +9,7 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController {
     
+    @IBOutlet weak var imageOfPlace: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -17,10 +18,10 @@ class NewPlaceViewController: UITableViewController {
             //добавим меню для выбора фото new place
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let camera = UIAlertAction(title: "Camera", style: .default) { _ in
-                self.chooseImagePicker(sourse: .camera)
+                self.chooseImagePicker(source: .camera)
             }
             let photo = UIAlertAction(title: "Photo", style: .default) { _ in
-                self.chooseImagePicker(sourse: .photoLibrary)
+                self.chooseImagePicker(source: .photoLibrary)
             }
             let cancel = UIAlertAction(title: "Cancel", style: .cancel)
             actionSheet.addAction(camera)
@@ -42,18 +43,29 @@ extension NewPlaceViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    // скрываем клавиатуру по тапу на ячейку
 }
 
 // MARK: - Work with image
-extension NewPlaceViewController {
-    func chooseImagePicker(sourse: UIImagePickerController.SourceType) {
-        if UIImagePickerController.isSourceTypeAvailable(sourse) {
+extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func chooseImagePicker(source: UIImagePickerController.SourceType) {
+        if UIImagePickerController.isSourceTypeAvailable(source) {
             let imagePicker = UIImagePickerController()
+            // данный объект будет делегировать обязанности
+            // по выполнению метода imagePickerController
+            imagePicker.delegate = self
             imagePicker.allowsEditing = true
-            imagePicker.sourceType = sourse
+            imagePicker.sourceType = source
             present(imagePicker, animated: true)
             
         }
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        imageOfPlace.image = info[.editedImage] as? UIImage
+        // масштабируем изображение по UIImage
+        imageOfPlace.contentMode = .scaleAspectFill
+        // обрезка по границе изображения
+        imageOfPlace.clipsToBounds = true
+        // закрывает данный метод
+        dismiss(animated: true)
     }
 }
