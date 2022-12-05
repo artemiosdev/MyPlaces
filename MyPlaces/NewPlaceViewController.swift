@@ -8,10 +8,18 @@
 import UIKit
 
 class NewPlaceViewController: UITableViewController {
-    
-    @IBOutlet weak var imageOfPlace: UIImageView!
+    var newPlace: Place?
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var placeImage: UIImageView!
+    @IBOutlet weak var placeName: UITextField!
+    @IBOutlet weak var placeLocation: UITextField!
+    @IBOutlet weak var placeType: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        saveButton.isEnabled = false
+        
+        // отслеживание поля Name, для Save button
+        placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
@@ -43,6 +51,10 @@ class NewPlaceViewController: UITableViewController {
         } else {
             view.endEditing(true)
         }
+        
+        func saveNewPlace() {
+            newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, image: placeImage.image, restaurantImage: nil)
+        }
     }
     
     
@@ -53,6 +65,14 @@ extension NewPlaceViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    @objc private func textFieldChanged() {
+        if placeName.text?.isEmpty == false {
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
     }
 }
 
@@ -71,11 +91,11 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         }
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imageOfPlace.image = info[.editedImage] as? UIImage
+        placeImage.image = info[.editedImage] as? UIImage
         // масштабируем изображение по UIImage
-        imageOfPlace.contentMode = .scaleAspectFill
+        placeImage.contentMode = .scaleAspectFill
         // обрезка по границе изображения
-        imageOfPlace.clipsToBounds = true
+        placeImage.clipsToBounds = true
         // закрывает данный метод
         dismiss(animated: true)
     }
