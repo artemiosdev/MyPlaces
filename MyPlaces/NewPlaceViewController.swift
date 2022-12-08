@@ -8,7 +8,6 @@
 import UIKit
 
 class NewPlaceViewController: UITableViewController {
-    var newPlace = Place()
     var imageIsChanged = false
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var placeImage: UIImageView!
@@ -17,12 +16,7 @@ class NewPlaceViewController: UITableViewController {
     @IBOutlet weak var placeType: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.async {
-            self.newPlace.savePlaces()
-        }
         saveButton.isEnabled = false
-
-        
         // отслеживание поля Name, для Save button
         placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
     }
@@ -67,8 +61,10 @@ class NewPlaceViewController: UITableViewController {
         } else {
             image = #imageLiteral(resourceName: "imagePlaceholder")
         }
-//        newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, image: image, restaurantImage: nil)
-    }
+        let imageData = image?.pngData()
+        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
+        StorageManager.saveObject(newPlace)
+     }
     
     @IBAction func cancelAction(_ sender: Any) {
         dismiss(animated: true)
