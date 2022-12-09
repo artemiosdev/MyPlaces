@@ -34,6 +34,18 @@ class MainViewController: UITableViewController {
         return cell
     }
     
+    // MARK: - Table View Delegate
+    // добавим свайп справа налево
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let place = places[indexPath.row]
+        let deleteAction = UIContextualAction(style: .destructive, title: "deleteActionTitle") {  (contextualAction, view, boolValue) in
+            StorageManager.deleteObject(place)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+      }
+      let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
+      return swipeActions
+  }
+    
     /*
      // MARK: - Navigation
      // In a storyboard-based application, you will often want to do a little preparation before navigation
