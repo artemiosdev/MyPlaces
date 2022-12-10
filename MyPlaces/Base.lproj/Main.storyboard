@@ -77,7 +77,7 @@
                             <outlet property="delegate" destination="HxL-Tx-Z9s" id="2Iw-D6-A9i"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Places" id="LG7-L7-f8l">
+                    <navigationItem key="navigationItem" title="My Places" largeTitleDisplayMode="never" id="LG7-L7-f8l">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1pP-Mj-3sA">
                             <color key="tintColor" red="0.0" green="0.45882352939999999" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -95,7 +95,7 @@
             <objects>
                 <tableViewController id="WuX-aF-bW3" customClass="NewPlaceViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="eT4-AK-c2r">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
@@ -235,7 +235,7 @@
                             <outlet property="delegate" destination="WuX-aF-bW3" id="HDz-RF-1qH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Place" id="dsb-fb-FfI">
+                    <navigationItem key="navigationItem" title="New Place" largeTitleDisplayMode="always" id="dsb-fb-FfI">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cOu-zK-9gz">
                             <connections>
                                 <action selector="cancelAction:" destination="WuX-aF-bW3" id="g1j-eb-Vc7"/>
@@ -264,8 +264,8 @@
         <scene sceneID="iPS-f2-FV2">
             <objects>
                 <navigationController id="fP4-9o-oW9" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Rv-NS-8CR">
-                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="4Rv-NS-8CR">
+                        <rect key="frame" x="0.0" y="44" width="390" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="30"/>
@@ -299,7 +299,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QS3-MO-Fwm"/>
+        <segue reference="7w7-k4-bE6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Photo" width="194.66667175292969" height="195.66667175292969"/>
