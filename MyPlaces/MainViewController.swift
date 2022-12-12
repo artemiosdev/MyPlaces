@@ -7,10 +7,15 @@
 
 import UIKit
 import RealmSwift
- 
+
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBOutlet var reversedSortingButton: UIBarButtonItem!
+    
+    
+    var ascendingSorting = true
     
     var places: Results<Place>!
     override func viewDidLoad() {
@@ -19,7 +24,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         places = realm.objects(Place.self)
         tableView.rowHeight = 120
     }
-
+    
     // MARK: - Table view data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places.isEmpty ? 0 : places.count
@@ -44,22 +49,22 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {  (contextualAction, view, boolValue) in
             StorageManager.deleteObject(place)
             tableView.deleteRows(at: [indexPath], with: .automatic)
-      }
-      let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
-      return swipeActions
-  }
+        }
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
+        return swipeActions
+    }
     
-     // MARK: - Navigation
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-         if segue.identifier == "showDetail" {
-             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-             let place = places[indexPath.row]
-             let newPlaceVC = segue.destination as! NewPlaceViewController
-             newPlaceVC.currentPlace = place
-         }
-     }
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "showDetail" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let place = places[indexPath.row]
+            let newPlaceVC = segue.destination as! NewPlaceViewController
+            newPlaceVC.currentPlace = place
+        }
+    }
     
     // выход по нажатию на Cancel в окне добавления
     // ранее этот метод назывался cancelAction
@@ -68,5 +73,30 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         newPlaceVC.savePlace()
         tableView.reloadData()
     }
-}
     
+    @IBAction func sortSelection(_ sender: UISegmentedControl) {
+        sorting()
+    }
+    
+    @IBAction func reversedSorting(_ sender: UIBarButtonItem) {
+        // меняет значение на противоположное
+        ascendingSorting.toggle()
+        if ascendingSorting {
+            reversedSortingButton.image = #imageLiteral(resourceName: "AZ")
+        } else {
+            reversedSortingButton.image = #imageLiteral(resourceName: "ZA")
+        }
+        sorting()
+    }
+    private func sorting() {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            places = places.sorted(byKeyPath: "date", ascending: ascendingSorting)
+        } else {
+            places = places.sorted(byKeyPath: "name", ascending: ascendingSorting)
+        }
+        tableView.reloadData()
+    }
+    
+}
+
+

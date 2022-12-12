@@ -89,6 +89,9 @@
                                     <segment title="Name"/>
                                 </segments>
                                 <color key="selectedSegmentTintColor" systemColor="systemMintColor"/>
+                                <connections>
+                                    <action selector="sortSelection:" destination="S4Y-pb-EA1" eventType="valueChanged" id="oxP-M4-UyB"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LCq-bu-f5P"/>
@@ -100,7 +103,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Places" largeTitleDisplayMode="never" id="4H3-sX-3Ac">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="KVr-1N-WV6"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="KVr-1N-WV6">
+                            <connections>
+                                <action selector="reversedSorting:" destination="S4Y-pb-EA1" id="Axq-Om-XDJ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ucI-lc-2In">
                             <color key="tintColor" red="0.0" green="0.45882352939999999" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -109,6 +116,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="reversedSortingButton" destination="KVr-1N-WV6" id="0cB-1N-cNQ"/>
+                        <outlet property="segmentedControl" destination="LCe-Hn-U2B" id="BRJ-9R-Bq4"/>
                         <outlet property="tableView" destination="Ybf-ym-Lp3" id="LMk-5y-JZc"/>
                     </connections>
                 </viewController>
@@ -121,7 +130,7 @@
             <objects>
                 <tableViewController id="WuX-aF-bW3" customClass="NewPlaceViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="eT4-AK-c2r">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
@@ -325,7 +334,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7w7-k4-bE6"/>
+        <segue reference="vEa-IJ-sTy"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AZ" width="25" height="24"/>
