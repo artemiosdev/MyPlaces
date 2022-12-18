@@ -16,6 +16,7 @@
 		DD53629129351636009A19FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD53628F29351636009A19FF /* LaunchScreen.storyboard */; };
 		DD5362992935345C009A19FF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5362982935345C009A19FF /* MainViewController.swift */; };
 		DD9D0B1A293D1B8F008B910C /* NewPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9D0B19293D1B8F008B910C /* NewPlaceViewController.swift */; };
+		DDA814EF294F10C900042D00 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA814EE294F10C900042D00 /* RatingControl.swift */; };
 		DDE870C8293F4C4200D53156 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DDE870C7293F4C4200D53156 /* Realm */; };
 		DDE870CA293F4C4200D53156 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DDE870C9293F4C4200D53156 /* RealmSwift */; };
 		DDE870CC293F6C5500D53156 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE870CB293F6C5500D53156 /* StorageManager.swift */; };
@@ -33,6 +34,7 @@
 		DD53629229351636009A19FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD5362982935345C009A19FF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DD9D0B19293D1B8F008B910C /* NewPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaceViewController.swift; sourceTree = "<group>"; };
+		DDA814EE294F10C900042D00 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		DDE870CB293F6C5500D53156 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,6 +76,7 @@
 				DDE870CB293F6C5500D53156 /* StorageManager.swift */,
 				DD50B452293915AB0089131A /* CustomTableViewCell.swift */,
 				DD5362982935345C009A19FF /* MainViewController.swift */,
+				DDA814EE294F10C900042D00 /* RatingControl.swift */,
 				DD9D0B19293D1B8F008B910C /* NewPlaceViewController.swift */,
 				DD53628A29351634009A19FF /* Main.storyboard */,
 				DD53628D29351636009A19FF /* Assets.xcassets */,
@@ -165,6 +168,7 @@
 				DD9D0B1A293D1B8F008B910C /* NewPlaceViewController.swift in Sources */,
 				DD53628529351634009A19FF /* AppDelegate.swift in Sources */,
 				DDE870CC293F6C5500D53156 /* StorageManager.swift in Sources */,
+				DDA814EF294F10C900042D00 /* RatingControl.swift in Sources */,
 				DD3393382939EF3E004179BD /* PlaceModel.swift in Sources */,
 				DD50B453293915AB0089131A /* CustomTableViewCell.swift in Sources */,
 				DD53628729351634009A19FF /* SceneDelegate.swift in Sources */,
