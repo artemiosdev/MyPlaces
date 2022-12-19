@@ -269,16 +269,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6WE-qi-Nep" customClass="RatingControl" customModule="MyPlaces" customModuleProvider="target">
-                                                    <rect key="frame" x="25" y="45" width="340" height="50"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="starsCount">
-                                                            <integer key="value" value="6"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="size" keyPath="starsSize">
-                                                            <size key="value" width="50" height="50"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
+                                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="340" placeholderIntrinsicHeight="50" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6WE-qi-Nep" customClass="RatingControl" customModule="MyPlaces" customModuleProvider="target">
+                                                    <rect key="frame" x="69" y="48" width="252" height="44"/>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -358,6 +350,11 @@
             <point key="canvasLocation" x="1660" y="-355"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="6WE-qi-Nep">
+            <size key="intrinsicContentSize" width="340" height="50"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="vEa-IJ-sTy"/>
     </inferredMetricsTieBreakers>
