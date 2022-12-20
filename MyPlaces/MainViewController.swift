@@ -12,16 +12,19 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // nil так как хотим использовать для результатов поиска тот же view
     private let searchController = UISearchController(searchResultsController: nil)
+    
     private var filteredPlaces: Results<Place>!
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
     }
+    
     // отслеживание активации поискового запроса
     // true когда поисковый запрос будет активирован
     private var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
     }
+    
     private var ascendingSorting = true
     private var places: Results<Place>!
     
@@ -53,23 +56,30 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if isFiltering {
             return filteredPlaces.count
         }
-        return places.isEmpty ? 0 : places.count
+        //        return places.isEmpty ? 0 : places.count
+        return places.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-        var place = Place()
-        if isFiltering {
-            place = filteredPlaces[indexPath.row]
-        } else {
-            place = places[indexPath.row]
-        }
+        
+        //        var place = Place()
+        //        if isFiltering {
+        //            place = filteredPlaces[indexPath.row]
+        //        } else {
+        //            place = places[indexPath.row]
+        //        }
+        // заменим на ->
+        let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
+        
         cell.nameLabel.text = place.name
         cell.locationLabel.text = place.location
         cell.typeLabel.text = place.type
         cell.imageOfPlace.image = UIImage(data: place.imageData!)
-        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
-        cell.imageOfPlace.clipsToBounds = true
+        
+        
+        // для нашего Cosmos рейтинга
+        cell.cosmosView.rating = place.rating
         return cell
     }
     
@@ -97,12 +107,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Pass the selected object to the new view controller.
         if segue.identifier == "showDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            let place: Place
-            if isFiltering {
-                place = filteredPlaces[indexPath.row]
-            } else {
-                place = places[indexPath.row]
-            }
+            
+            //            let place: Place
+            //            if isFiltering {
+            //                place = filteredPlaces[indexPath.row]
+            //            } else {
+            //                place = places[indexPath.row]
+            //            }
+            //            заменим на ->
+            let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
+            
             let newPlaceVC = segue.destination as! NewPlaceViewController
             newPlaceVC.currentPlace = place
         }
