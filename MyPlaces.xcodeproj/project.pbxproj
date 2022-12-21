@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DD3393382939EF3E004179BD /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3393372939EF3E004179BD /* PlaceModel.swift */; };
+		DD3FE83629532995009AC796 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FE83529532995009AC796 /* MapViewController.swift */; };
 		DD50B453293915AB0089131A /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD50B452293915AB0089131A /* CustomTableViewCell.swift */; };
 		DD53628529351634009A19FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53628429351634009A19FF /* AppDelegate.swift */; };
 		DD53628729351634009A19FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD53628629351634009A19FF /* SceneDelegate.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		DD3393372939EF3E004179BD /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		DD3FE83529532995009AC796 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		DD50B452293915AB0089131A /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		DD53628129351634009A19FF /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD53628429351634009A19FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				DD5362982935345C009A19FF /* MainViewController.swift */,
 				DDA814EE294F10C900042D00 /* RatingControl.swift */,
 				DD9D0B19293D1B8F008B910C /* NewPlaceViewController.swift */,
+				DD3FE83529532995009AC796 /* MapViewController.swift */,
 				DD53628A29351634009A19FF /* Main.storyboard */,
 				DD53628D29351636009A19FF /* Assets.xcassets */,
 				DD53628F29351636009A19FF /* LaunchScreen.storyboard */,
@@ -172,6 +175,7 @@
 				DD9D0B1A293D1B8F008B910C /* NewPlaceViewController.swift in Sources */,
 				DD53628529351634009A19FF /* AppDelegate.swift in Sources */,
 				DDE870CC293F6C5500D53156 /* StorageManager.swift in Sources */,
+				DD3FE83629532995009AC796 /* MapViewController.swift in Sources */,
 				DDA814EF294F10C900042D00 /* RatingControl.swift in Sources */,
 				DD3393382939EF3E004179BD /* PlaceModel.swift in Sources */,
 				DD50B453293915AB0089131A /* CustomTableViewCell.swift in Sources */,
