@@ -303,7 +303,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="340" placeholderIntrinsicHeight="50" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6WE-qi-Nep" customClass="RatingControl" customModule="MyPlaces" customModuleProvider="target">
-                                                    <rect key="frame" x="69" y="48" width="252" height="44"/>
+                                                    <rect key="frame" x="25" y="45" width="340" height="50"/>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -382,6 +382,9 @@
                             <constraint firstItem="Gc6-ij-1h7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pqc-wg-HRX" secondAttribute="leading" symbolic="YES" id="vij-CH-yuQ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="XhV-FW-exr" id="Jzo-UL-Vm3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ceB-tL-Ghf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
