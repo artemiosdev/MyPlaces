@@ -14,12 +14,21 @@ class MapViewController: UIViewController {
     var place = Place()
     let annotationIdentifier = "annotationIdentifier"
     let locationManager = CLLocationManager()
+    let regionInMeters = 10_000.0
     @IBOutlet var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         setupPlacemark()
         checkLocationServices()
+    }
+    // при нажатии, карта отцентрируется по месту положения пользователя
+    @IBAction func centerViewInUserLocation() {
+        if let location = locationManager.location?.coordinate {
+            // определим регион местоположение, в 10 км
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+            mapView.setRegion(region, animated: true)
+        }
     }
     
     @IBAction func closeVC() {
@@ -62,7 +71,12 @@ class MapViewController: UIViewController {
             setupLocationManager()
             checkLocationAuthorization()
         } else {
-            // create alert controller
+            // create and show alert controller about setup geolocation
+            // позволяет отложить запуск alert на 1 секунду
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showAlert( title: "Your Location is not Available",
+                                message: "To give permission Go to: Setting -> MyPlaces -> Location")
+            }
         }
     }
     
@@ -87,7 +101,11 @@ class MapViewController: UIViewController {
             // статус, когда приложению отказано в использовании служб геолокации,
             // или они отключены в настройках
         case .denied:
-            // show alert controller about setup geolocation, you need is enable it
+            // show alert controller about setup geolocation
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showAlert(title: "Your Location is not Available",
+                               message: "To give permission Go to: Setting -> MyPlaces -> Location")
+            }
             break
             // статус неопределен,
             // пользователь неопеределился с выбором
@@ -95,7 +113,7 @@ class MapViewController: UIViewController {
             locationManager.requestWhenInUseAuthorization()
             // если приложение не авторизовано для служб геолокации
         case .restricted:
-            // show alert controller about setup geolocation, you need is enable it
+            // show alert controller about setup geolocation
             break
             // когда разрешение на использование геолокации получено
         case .authorizedAlways:
@@ -104,6 +122,13 @@ class MapViewController: UIViewController {
         @unknown default:
             print("New case is available")
         }
+    }
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+        
     }
     
 }

@@ -303,7 +303,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="340" placeholderIntrinsicHeight="50" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6WE-qi-Nep" customClass="RatingControl" customModule="MyPlaces" customModuleProvider="target">
-                                                    <rect key="frame" x="25" y="45" width="340" height="50"/>
+                                                    <rect key="frame" x="69" y="48" width="252" height="44"/>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -369,6 +369,18 @@
                                     <action selector="closeVC" destination="dLO-Ax-v2J" eventType="touchUpInside" id="VJt-Rd-Xo5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2um-Bf-Kro">
+                                <rect key="frame" x="283.33333333333331" y="700" width="66.666666666666686" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2Cj-HH-g0E"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="AdQ-BY-LfG"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Location"/>
+                                <connections>
+                                    <action selector="centerViewInUserLocation" destination="dLO-Ax-v2J" eventType="touchUpInside" id="cwu-Rj-0H5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pqc-wg-HRX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -379,7 +391,10 @@
                             <constraint firstAttribute="bottom" secondItem="XhV-FW-exr" secondAttribute="bottom" id="aF9-RQ-v0S"/>
                             <constraint firstItem="pqc-wg-HRX" firstAttribute="trailing" secondItem="Gc6-ij-1h7" secondAttribute="trailing" constant="50" id="aff-Cr-2tg"/>
                             <constraint firstItem="XhV-FW-exr" firstAttribute="trailing" secondItem="pqc-wg-HRX" secondAttribute="trailing" id="bY3-Dd-rWb"/>
+                            <constraint firstItem="pqc-wg-HRX" firstAttribute="trailing" secondItem="2um-Bf-Kro" secondAttribute="trailing" constant="40" id="fQ2-EL-0te"/>
+                            <constraint firstItem="pqc-wg-HRX" firstAttribute="bottom" secondItem="2um-Bf-Kro" secondAttribute="bottom" constant="40" id="iHL-SJ-k4V"/>
                             <constraint firstItem="Gc6-ij-1h7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pqc-wg-HRX" secondAttribute="leading" symbolic="YES" id="vij-CH-yuQ"/>
+                            <constraint firstItem="2um-Bf-Kro" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pqc-wg-HRX" secondAttribute="leading" symbolic="YES" id="vjD-W2-GxG"/>
                         </constraints>
                     </view>
                     <connections>
@@ -441,6 +456,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AZ" width="25" height="24"/>
+        <image name="Location" width="42.5" height="42.5"/>
         <image name="Photo" width="194.66667175292969" height="195.66667175292969"/>
         <image name="cancel" width="28.333333969116211" height="28.333333969116211"/>
         <image name="emptyStar" width="255" height="256"/>
