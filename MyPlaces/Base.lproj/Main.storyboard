@@ -233,16 +233,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6c3-wy-t8N">
-                                                    <rect key="frame" x="16" y="8" width="358" height="66"/>
+                                                    <rect key="frame" x="16" y="8" width="321" height="66"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="alf-Io-dQ6">
-                                                            <rect key="frame" x="0.0" y="0.0" width="358" height="27.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="321" height="27.333333333333332"/>
                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Thin" family="Apple SD Gothic Neo" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Place location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pCc-Le-uNN">
-                                                            <rect key="frame" x="0.0" y="35.333333333333336" width="358" height="30.666666666666664"/>
+                                                            <rect key="frame" x="0.0" y="35.333333333333336" width="321" height="30.666666666666664"/>
                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="20"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             <connections>
@@ -251,11 +251,25 @@
                                                         </textField>
                                                     </subviews>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmk-3w-1cP">
+                                                    <rect key="frame" x="345" y="46.333333333333336" width="25" height="25.000000000000007"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="6Eb-hQ-nHF"/>
+                                                        <constraint firstAttribute="width" constant="25" id="L7Y-qX-rff"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="Placeholder"/>
+                                                    <connections>
+                                                        <segue destination="dLO-Ax-v2J" kind="presentation" identifier="getAdress" id="hx5-dv-PNd"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="6c3-wy-t8N" firstAttribute="leading" secondItem="ZOh-aT-9al" secondAttribute="leading" constant="16" id="18v-XI-OhK"/>
+                                                <constraint firstItem="pmk-3w-1cP" firstAttribute="leading" secondItem="6c3-wy-t8N" secondAttribute="trailing" constant="8" id="CdV-6F-B66"/>
                                                 <constraint firstItem="6c3-wy-t8N" firstAttribute="top" secondItem="ZOh-aT-9al" secondAttribute="top" constant="8" id="H3E-0X-LW0"/>
-                                                <constraint firstAttribute="trailing" secondItem="6c3-wy-t8N" secondAttribute="trailing" constant="16" id="Khd-Xg-zpa"/>
+                                                <constraint firstItem="pmk-3w-1cP" firstAttribute="trailing" secondItem="ZOh-aT-9al" secondAttribute="trailingMargin" id="Ox2-1N-IXi"/>
+                                                <constraint firstItem="pmk-3w-1cP" firstAttribute="centerY" secondItem="pCc-Le-uNN" secondAttribute="centerY" id="doC-cW-3qb"/>
                                                 <constraint firstAttribute="bottom" secondItem="6c3-wy-t8N" secondAttribute="bottom" constant="1" id="gGZ-5V-6rH"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -344,7 +358,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fcr-i4-hrL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="mFa-ei-2rx" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2490.7692307692305" y="44.7867298578199"/>
+            <point key="canvasLocation" x="2489.2307692307691" y="44.7867298578199"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="Sci-k2-qIk">
@@ -452,12 +466,14 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
+        <segue reference="Nye-xa-RWw"/>
         <segue reference="vEa-IJ-sTy"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AZ" width="25" height="24"/>
         <image name="Location" width="42.5" height="42.5"/>
         <image name="Photo" width="194.66667175292969" height="195.66667175292969"/>
+        <image name="Placeholder" width="20" height="20"/>
         <image name="cancel" width="28.333333969116211" height="28.333333969116211"/>
         <image name="emptyStar" width="255" height="256"/>
         <image name="filledStar" width="237.5" height="238"/>

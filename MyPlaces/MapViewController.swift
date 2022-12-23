@@ -15,24 +15,27 @@ class MapViewController: UIViewController {
     let annotationIdentifier = "annotationIdentifier"
     let locationManager = CLLocationManager()
     let regionInMeters = 10_000.0
+    let incomeSegueIdentifier = ""
     @IBOutlet var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        setupPlacemark()
+        setupMapView()
         checkLocationServices()
     }
     // при нажатии, карта отцентрируется по месту положения пользователя
     @IBAction func centerViewInUserLocation() {
-        if let location = locationManager.location?.coordinate {
-            // определим регион местоположение, в 10 км
-            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-            mapView.setRegion(region, animated: true)
-        }
+        showUserLocation()
     }
     
     @IBAction func closeVC() {
         dismiss(animated: true)
+    }
+    
+    private func setupMapView() {
+        if incomeSegueIdentifier == "showPlace" {
+            setupPlacemark()
+        }
     }
     
     private func setupPlacemark() {
@@ -97,6 +100,7 @@ class MapViewController: UIViewController {
             // в момент его использования
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
+            if incomeSegueIdentifier == "getAdress" { showUserLocation() }
             break
             // статус, когда приложению отказано в использовании служб геолокации,
             // или они отключены в настройках
@@ -123,6 +127,15 @@ class MapViewController: UIViewController {
             print("New case is available")
         }
     }
+    
+    private func showUserLocation() {
+        if let location = locationManager.location?.coordinate {
+            // определим регион местоположение, в 10 км
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
