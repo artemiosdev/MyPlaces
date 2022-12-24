@@ -10,14 +10,14 @@ import UIKit
 class NewPlaceViewController: UITableViewController {
     var currentPlace: Place!
     var imageIsChanged = false
-
+    
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var placeImage: UIImageView!
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeType: UITextField!
     @IBOutlet var ratingControl: RatingControl!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         saveButton.isEnabled = false
@@ -61,24 +61,29 @@ class NewPlaceViewController: UITableViewController {
     
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier != "showMap" { return }
         
-        let mapVC = segue.destination as! MapViewController
-        mapVC.place.name = placeName.text!
-        mapVC.place.location = placeLocation.text
-        mapVC.place.type = placeType.text
-        mapVC.place.imageData = placeImage.image?.pngData()
+        guard let identifier = segue.identifier,
+              let mapVC = segue.destination as? MapViewController
+        else { return }
+        
+        mapVC.incomeSegueIdentifier = identifier
+        if identifier == "showPlace" {
+            mapVC.place.name = placeName.text!
+            mapVC.place.location = placeLocation.text
+            mapVC.place.type = placeType.text
+            mapVC.place.imageData = placeImage.image?.pngData()
+        }
         
     }
     
     
     func savePlace() {
-//        var image: UIImage?
-//        if imageIsChanged {
-//            image = placeImage.image
-//        } else {
-//            image = #imageLiteral(resourceName: "imagePlaceholder")
-//        }
+        //        var image: UIImage?
+        //        if imageIsChanged {
+        //            image = placeImage.image
+        //        } else {
+        //            image = #imageLiteral(resourceName: "imagePlaceholder")
+        //        }
         let image: UIImage? = imageIsChanged ? placeImage.image : #imageLiteral(resourceName: "imagePlaceholder")
         let imageData = image?.pngData()
         let newPlace = Place(name: placeName.text!,

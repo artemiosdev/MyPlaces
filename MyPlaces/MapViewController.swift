@@ -15,8 +15,13 @@ class MapViewController: UIViewController {
     let annotationIdentifier = "annotationIdentifier"
     let locationManager = CLLocationManager()
     let regionInMeters = 10_000.0
-    let incomeSegueIdentifier = ""
+    var incomeSegueIdentifier = ""
+    
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet var mapPinImage: UIImageView!
+    @IBOutlet var adressLabel: UILabel!
+    @IBOutlet var doneButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -32,9 +37,17 @@ class MapViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    @IBAction func doneButtonPressed() {
+        
+    }
+    
+    
     private func setupMapView() {
         if incomeSegueIdentifier == "showPlace" {
             setupPlacemark()
+            mapPinImage.isHidden = true
+            adressLabel.isHidden = true
+            doneButton.isHidden = true
         }
     }
     
