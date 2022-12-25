@@ -255,7 +255,7 @@
                                                     <rect key="frame" x="345" y="46.333333333333336" width="25" height="25.000000000000007"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="6Eb-hQ-nHF"/>
-                                                        <constraint firstAttribute="width" constant="25" id="L7Y-qX-rff"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="25" placeholder="YES" id="L7Y-qX-rff"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="Placeholder"/>
@@ -317,7 +317,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="340" placeholderIntrinsicHeight="50" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6WE-qi-Nep" customClass="RatingControl" customModule="MyPlaces" customModuleProvider="target">
-                                                    <rect key="frame" x="25" y="45" width="340" height="50"/>
+                                                    <rect key="frame" x="69" y="48" width="252" height="44"/>
                                                 </stackView>
                                             </subviews>
                                             <constraints>

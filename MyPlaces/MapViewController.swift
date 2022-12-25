@@ -24,6 +24,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        adressLabel.text = ""
         mapView.delegate = self
         setupMapView()
         checkLocationServices()
@@ -149,6 +150,12 @@ class MapViewController: UIViewController {
         }
     }
     
+    private func getCenterLocation(for mapView: MKMapView) -> CLLocation {
+        let longitude = mapView.centerCoordinate.longitude
+        let latitude = mapView.centerCoordinate.latitude
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
@@ -178,6 +185,33 @@ extension MapViewController: MKMapViewDelegate {
             annotationView?.rightCalloutAccessoryView = imageView
         }
         return annotationView
+    }
+    
+    // считывание центра местоположение
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let center = getCenterLocation(for: mapView)
+        let geocoder = CLGeocoder()
+        // преобразуем координаты в адрес
+        geocoder.reverseGeocodeLocation(center) { placemarks, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let placemarks = placemarks else { return }
+            let placemark = placemarks.first
+            let streetName = placemark?.thoroughfare
+            let buildName = placemark?.subThoroughfare
+            // обновляем интерфейс в основном потоке асинхронно
+            DispatchQueue.main.async {
+                if streetName != nil && buildName != nil {
+                    self.adressLabel.text = "\(streetName!), \(buildName!)"
+                } else if streetName != nil {
+                    self.adressLabel.text = "\(streetName!)"
+                } else {
+                    self.adressLabel.text = ""
+                }
+            }
+        }
     }
 }
 
