@@ -260,7 +260,7 @@
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="Placeholder"/>
                                                     <connections>
-                                                        <segue destination="dLO-Ax-v2J" kind="presentation" identifier="getAdress" id="hx5-dv-PNd"/>
+                                                        <segue destination="dLO-Ax-v2J" kind="presentation" identifier="getAddress" id="hx5-dv-PNd"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -443,7 +443,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="adressLabel" destination="beM-nT-YOV" id="bn4-to-zV1"/>
+                        <outlet property="addressLabel" destination="beM-nT-YOV" id="bn4-to-zV1"/>
                         <outlet property="doneButton" destination="ICM-pp-rk8" id="qVU-LB-IZy"/>
                         <outlet property="mapPinImage" destination="ELw-bT-xlw" id="bBv-Ci-Hj9"/>
                         <outlet property="mapView" destination="XhV-FW-exr" id="Jzo-UL-Vm3"/>

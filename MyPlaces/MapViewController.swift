@@ -9,8 +9,12 @@ import UIKit
 import MapKit
 import CoreLocation
 
+protocol MapViewContollerDelegate {
+  func getAddress(_ address: String?)
+}
+
 class MapViewController: UIViewController {
-    
+    var mapViewControllerDelegate: MapViewContollerDelegate?
     var place = Place()
     let annotationIdentifier = "annotationIdentifier"
     let locationManager = CLLocationManager()
@@ -19,12 +23,12 @@ class MapViewController: UIViewController {
     
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var mapPinImage: UIImageView!
-    @IBOutlet var adressLabel: UILabel!
+    @IBOutlet var addressLabel: UILabel!
     @IBOutlet var doneButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        adressLabel.text = ""
+        addressLabel.text = ""
         mapView.delegate = self
         setupMapView()
         checkLocationServices()
@@ -39,7 +43,9 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed() {
-        
+        mapViewControllerDelegate?.getAddress(addressLabel.text)
+        // закрываем view controller
+        dismiss(animated: true)
     }
     
     
@@ -47,7 +53,7 @@ class MapViewController: UIViewController {
         if incomeSegueIdentifier == "showPlace" {
             setupPlacemark()
             mapPinImage.isHidden = true
-            adressLabel.isHidden = true
+            addressLabel.isHidden = true
             doneButton.isHidden = true
         }
     }
@@ -114,7 +120,7 @@ class MapViewController: UIViewController {
             // в момент его использования
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
-            if incomeSegueIdentifier == "getAdress" { showUserLocation() }
+            if incomeSegueIdentifier == "getAddress" { showUserLocation() }
             break
             // статус, когда приложению отказано в использовании служб геолокации,
             // или они отключены в настройках
@@ -204,11 +210,11 @@ extension MapViewController: MKMapViewDelegate {
             // обновляем интерфейс в основном потоке асинхронно
             DispatchQueue.main.async {
                 if streetName != nil && buildName != nil {
-                    self.adressLabel.text = "\(streetName!), \(buildName!)"
+                    self.addressLabel.text = "\(streetName!), \(buildName!)"
                 } else if streetName != nil {
-                    self.adressLabel.text = "\(streetName!)"
+                    self.addressLabel.text = "\(streetName!)"
                 } else {
-                    self.adressLabel.text = ""
+                    self.addressLabel.text = ""
                 }
             }
         }
