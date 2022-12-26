@@ -58,7 +58,7 @@
          </EnvironmentVariable>
       </EnvironmentVariables>
       <LocationScenarioReference
-         identifier = "New York, NY, USA"
+         identifier = "Moscow, Russia"
          referenceType = "1">
       </LocationScenarioReference>
    </LaunchAction>

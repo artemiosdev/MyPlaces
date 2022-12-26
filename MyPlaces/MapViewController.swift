@@ -20,11 +20,14 @@ class MapViewController: UIViewController {
     let locationManager = CLLocationManager()
     let regionInMeters = 10_000.0
     var incomeSegueIdentifier = ""
+    // принимает координаты заведения
+    var placeCoordinate: CLLocationCoordinate2D?
     
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var mapPinImage: UIImageView!
     @IBOutlet var addressLabel: UILabel!
     @IBOutlet var doneButton: UIButton!
+    @IBOutlet var goButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +45,10 @@ class MapViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    @IBAction func goButtonPressed() {
+        getDirections()
+    }
+    
     @IBAction func doneButtonPressed() {
         mapViewControllerDelegate?.getAddress(addressLabel.text)
         // закрываем view controller
@@ -50,11 +57,13 @@ class MapViewController: UIViewController {
     
     
     private func setupMapView() {
+        goButton.isHidden = true
         if incomeSegueIdentifier == "showPlace" {
             setupPlacemark()
             mapPinImage.isHidden = true
             addressLabel.isHidden = true
             doneButton.isHidden = true
+            goButton.isHidden = false
         }
     }
     
@@ -78,7 +87,9 @@ class MapViewController: UIViewController {
             annotation.subtitle = self.place.type
             // привяжем annotation к конкретной точке на карте
             guard let placemarkLocation = placemark?.location else { return }
+            
             annotation.coordinate = placemarkLocation.coordinate
+            self.placeCoordinate = placemarkLocation.coordinate
             // задаем видимую область карты
             self.mapView.showAnnotations([annotation], animated: true)
             // выделяем метку
@@ -156,6 +167,66 @@ class MapViewController: UIViewController {
         }
     }
     
+    private func getDirections() {
+        guard let location = locationManager.location?.coordinate else {
+            showAlert(title: "Error", message: "Current location is not found")
+            return
+        }
+        guard let request = createDirectionRequest(from: location) else {
+            showAlert(title: "Error", message: "Destination is not found")
+            return
+        }
+        let directions = MKDirections(request: request)
+        // расчёт маршрута
+        directions.calculate { response, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let response = response else {
+                self.showAlert(title: "Error", message: "Directions is not available")
+                return
+            }
+            // response содержит в себе массив маршрутов routes
+            // так как мы запросили и альтернативные маршруты
+            for route in response.routes {
+                // создаем геометрическое наложение маршрута
+                self.mapView.addOverlay(route.polyline)
+                // определяем зону видимости карты, чтобы весь маршрут умещался на экране
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                // доболнительная информация, расстояние и время в пути
+                let distance = String(format: "%.1f", route.distance / 1000)
+                let time = String(format: "%.0f", route.expectedTravelTime / 60)
+//                print("Расстояние до места: \(distance) км.")
+//                print("Время в пути составит: \(time) минут.")
+                
+//                изменить под свой label
+//                self.addressLabel.isHidden = false
+//                self.addressLabel.text = "Расстояние до места: \(distance) км. Время в пути составит: \(time) минут."
+                
+            }
+        }
+        
+        
+        
+    }
+    
+    private func createDirectionRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
+        guard let destinationCoordinate = placeCoordinate else { return nil }
+        // определяем точки начала и конца маршрута
+        let startingLocation = MKPlacemark(coordinate: coordinate)
+        let destination = MKPlacemark(coordinate: destinationCoordinate)
+        // создаем запрос на простроение маршрута между точками
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: startingLocation)
+        request.destination = MKMapItem(placemark: destination)
+        // зададим тип транспорта для построения маршрута
+        request.transportType = .automobile
+        // позволяет строить несколько альтернативных маршрутов если есть их варианты
+        request.requestsAlternateRoutes = true
+        return request
+    }
+    
     private func getCenterLocation(for mapView: MKMapView) -> CLLocation {
         let longitude = mapView.centerCoordinate.longitude
         let latitude = mapView.centerCoordinate.latitude
@@ -218,6 +289,13 @@ extension MapViewController: MKMapViewDelegate {
                 }
             }
         }
+    }
+    
+    // подсветим построенные маршруты на карте
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = .blue
+        return renderer
     }
 }
 
