@@ -28,6 +28,7 @@ class MapViewController: UIViewController {
     @IBOutlet var addressLabel: UILabel!
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var goButton: UIButton!
+    @IBOutlet var routeInformation: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,8 @@ class MapViewController: UIViewController {
     
     private func setupMapView() {
         goButton.isHidden = true
+        routeInformation.isHidden = true
+        routeInformation.layer.cornerRadius = 10
         if incomeSegueIdentifier == "showPlace" {
             setupPlacemark()
             mapPinImage.isHidden = true
@@ -197,13 +200,8 @@ class MapViewController: UIViewController {
                 // доболнительная информация, расстояние и время в пути
                 let distance = String(format: "%.1f", route.distance / 1000)
                 let time = String(format: "%.0f", route.expectedTravelTime / 60)
-//                print("Расстояние до места: \(distance) км.")
-//                print("Время в пути составит: \(time) минут.")
-                
-//                изменить под свой label
-//                self.addressLabel.isHidden = false
-//                self.addressLabel.text = "Расстояние до места: \(distance) км. Время в пути составит: \(time) минут."
-                
+                self.routeInformation.isHidden = false
+                self.routeInformation.text = "Расстояние до места: \(distance) км. \n Время в пути составит: \(time) минут."
             }
         }
         

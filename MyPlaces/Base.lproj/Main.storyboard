@@ -317,7 +317,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="340" placeholderIntrinsicHeight="50" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6WE-qi-Nep" customClass="RatingControl" customModule="MyPlaces" customModuleProvider="target">
-                                                    <rect key="frame" x="69" y="48" width="252" height="44"/>
+                                                    <rect key="frame" x="25" y="45" width="340" height="50"/>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -431,6 +431,19 @@
                                     <action selector="goButtonPressed" destination="dLO-Ax-v2J" eventType="touchUpInside" id="uJM-T1-eZo"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YAs-CX-Psx">
+                                <rect key="frame" x="16" y="165" width="358" height="21"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pqc-wg-HRX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -441,16 +454,20 @@
                             <constraint firstItem="ICM-pp-rk8" firstAttribute="centerX" secondItem="vRq-om-bi2" secondAttribute="centerX" id="8l4-i8-J7H"/>
                             <constraint firstItem="pqc-wg-HRX" firstAttribute="bottom" secondItem="2um-Bf-Kro" secondAttribute="bottom" constant="123" id="8lC-32-G7N"/>
                             <constraint firstItem="XhV-FW-exr" firstAttribute="top" secondItem="vRq-om-bi2" secondAttribute="top" id="8zK-2u-ycP"/>
+                            <constraint firstItem="beM-nT-YOV" firstAttribute="top" secondItem="YAs-CX-Psx" secondAttribute="bottom" constant="44" id="9xa-1l-jjx"/>
                             <constraint firstItem="beM-nT-YOV" firstAttribute="leading" secondItem="pqc-wg-HRX" secondAttribute="leading" constant="16" id="EYa-SG-FQo"/>
                             <constraint firstItem="Gc6-ij-1h7" firstAttribute="top" secondItem="pqc-wg-HRX" secondAttribute="top" constant="50" id="FZx-jF-N1L"/>
                             <constraint firstItem="XhV-FW-exr" firstAttribute="top" secondItem="beM-nT-YOV" secondAttribute="bottom" constant="-260" id="IRu-jn-Aky"/>
+                            <constraint firstItem="YAs-CX-Psx" firstAttribute="leading" secondItem="beM-nT-YOV" secondAttribute="leading" id="Jfo-Xu-Ouz"/>
                             <constraint firstItem="2um-Bf-Kro" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pqc-wg-HRX" secondAttribute="leading" symbolic="YES" id="MCd-PM-liQ"/>
+                            <constraint firstItem="YAs-CX-Psx" firstAttribute="trailing" secondItem="beM-nT-YOV" secondAttribute="trailing" id="Or9-Gd-LGi"/>
                             <constraint firstItem="ELw-bT-xlw" firstAttribute="centerY" secondItem="vRq-om-bi2" secondAttribute="centerY" constant="-20" id="WAg-UI-mLN"/>
                             <constraint firstAttribute="bottom" secondItem="XhV-FW-exr" secondAttribute="bottom" id="aF9-RQ-v0S"/>
                             <constraint firstItem="pqc-wg-HRX" firstAttribute="trailing" secondItem="Gc6-ij-1h7" secondAttribute="trailing" constant="50" id="aff-Cr-2tg"/>
                             <constraint firstItem="XhV-FW-exr" firstAttribute="trailing" secondItem="pqc-wg-HRX" secondAttribute="trailing" id="bY3-Dd-rWb"/>
                             <constraint firstItem="pqc-wg-HRX" firstAttribute="bottom" secondItem="ICM-pp-rk8" secondAttribute="bottom" constant="40" id="bxY-KP-5lA"/>
                             <constraint firstItem="ELw-bT-xlw" firstAttribute="centerX" secondItem="vRq-om-bi2" secondAttribute="centerX" id="dXN-2j-Apq"/>
+                            <constraint firstItem="YAs-CX-Psx" firstAttribute="top" secondItem="Gc6-ij-1h7" secondAttribute="bottom" constant="31" id="nnl-1K-vNt"/>
                             <constraint firstItem="pqc-wg-HRX" firstAttribute="bottom" secondItem="evW-gL-gS8" secondAttribute="bottom" constant="40" id="oB4-B7-26q"/>
                             <constraint firstItem="pqc-wg-HRX" firstAttribute="trailing" secondItem="beM-nT-YOV" secondAttribute="trailing" constant="16" id="us5-oR-WCw"/>
                             <constraint firstItem="Gc6-ij-1h7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="pqc-wg-HRX" secondAttribute="leading" symbolic="YES" id="vij-CH-yuQ"/>
@@ -462,6 +479,7 @@
                         <outlet property="goButton" destination="evW-gL-gS8" id="xvq-SE-bwR"/>
                         <outlet property="mapPinImage" destination="ELw-bT-xlw" id="bBv-Ci-Hj9"/>
                         <outlet property="mapView" destination="XhV-FW-exr" id="Jzo-UL-Vm3"/>
+                        <outlet property="routeInformation" destination="YAs-CX-Psx" id="efd-ug-Zz9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ceB-tL-Ghf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -515,7 +533,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="hx5-dv-PNd"/>
+        <segue reference="Nye-xa-RWw"/>
         <segue reference="vEa-IJ-sTy"/>
     </inferredMetricsTieBreakers>
     <resources>
