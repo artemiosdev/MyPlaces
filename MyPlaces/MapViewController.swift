@@ -18,10 +18,18 @@ class MapViewController: UIViewController {
     var place = Place()
     let annotationIdentifier = "annotationIdentifier"
     let locationManager = CLLocationManager()
-    let regionInMeters = 10_000.0
+    let regionInMeters = 1000.0
     var incomeSegueIdentifier = ""
+    // место хранения маршрутов
+    var directionsArray: [MKDirections] = []
     // принимает координаты заведения
     var placeCoordinate: CLLocationCoordinate2D?
+    // для хранения предыдущего местоположения пользователя
+    var previousLocation: CLLocation? {
+        didSet {
+            startTrackingUserLocation()
+        }
+    }
     
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var mapPinImage: UIImageView!
@@ -68,6 +76,17 @@ class MapViewController: UIViewController {
             doneButton.isHidden = true
             goButton.isHidden = false
         }
+    }
+    
+    private func resetMapView(withNew directions: MKDirections) {
+        // перед наложением нового маршрута
+        // удалим старый наложенный маршрут с карт
+        mapView.removeOverlays(mapView.overlays)
+        directionsArray.append(directions)
+        // отменим у каждого элемента из массива маршрут
+        let _ = directionsArray.map { $0.cancel() }
+        directionsArray.removeAll()
+        
     }
     
     private func setupPlacemark() {
@@ -170,16 +189,39 @@ class MapViewController: UIViewController {
         }
     }
     
+    private func startTrackingUserLocation() {
+        guard let previousLocation = previousLocation else { return }
+        let center = getCenterLocation(for: mapView)
+        guard center.distance(from: previousLocation) > 50 else { return }
+        self.previousLocation = center
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.showUserLocation()
+        }
+        
+
+    }
+    
     private func getDirections() {
         guard let location = locationManager.location?.coordinate else {
             showAlert(title: "Error", message: "Current location is not found")
             return
         }
-        guard let request = createDirectionRequest(from: location) else {
+        
+        // включим режим постоянного отслеживания пользователя
+        // после того как оно уже определено
+        locationManager.startUpdatingLocation()
+        previousLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        
+        guard let request = createDirectionsRequest(from: location) else {
             showAlert(title: "Error", message: "Destination is not found")
             return
         }
         let directions = MKDirections(request: request)
+        
+        // убираем старые маршруты
+        resetMapView(withNew: directions)
+        
+        // создаем новый маршрут
         // расчёт маршрута
         directions.calculate { response, error in
             if let error = error {
@@ -209,7 +251,7 @@ class MapViewController: UIViewController {
         
     }
     
-    private func createDirectionRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
+    private func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
         guard let destinationCoordinate = placeCoordinate else { return nil }
         // определяем точки начала и конца маршрута
         let startingLocation = MKPlacemark(coordinate: coordinate)
@@ -266,6 +308,17 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let center = getCenterLocation(for: mapView)
         let geocoder = CLGeocoder()
+        
+        if incomeSegueIdentifier == "showPlace" && previousLocation != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.showUserLocation()
+            }
+        }
+        
+        // освобождение ресурсов связанных с геокодированием
+        // отмена отложенного запроса
+        geocoder.cancelGeocode()
+        
         // преобразуем координаты в адрес
         geocoder.reverseGeocodeLocation(center) { placemarks, error in
             if let error = error {
