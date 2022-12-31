@@ -160,7 +160,7 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
     func chooseImagePicker(source: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(source) {
             let imagePicker = UIImagePickerController()
-            // данны й объект будет делегировать обязанности
+            // данный объект будет делегировать обязанности
             // по выполнению метода imagePickerController
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
