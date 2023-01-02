@@ -56,9 +56,7 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func goButtonPressed() {
-        mapManager.getDirections(for: mapView) { location in
-            self.previousLocation = location
-        }
+        getDirections()
     }
     
     @IBAction func doneButtonPressed() {
@@ -84,6 +82,57 @@ class MapViewController: UIViewController {
             goButton.isHidden = false
         }
     }
+    
+    private func getDirections() {
+        let locationManager = CLLocationManager()
+        guard let location = locationManager.location?.coordinate else {
+            mapManager.showAlert(title: "Error", message: "Current location is not found")
+            return
+        }
+        
+        // включим режим постоянного отслеживания пользователя
+        // после того как оно уже определено
+        locationManager.startUpdatingLocation()
+        previousLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        
+        guard let request = mapManager.createDirectionsRequest(from: location) else {
+            mapManager.showAlert(title: "Error", message: "Destination is not found")
+            return
+        }
+        let directions = MKDirections(request: request)
+        
+        // убираем старые маршруты
+        mapManager.resetMapView(withNew: directions, mapView: mapView)
+        
+        // создаем новый маршрут
+        // расчёт маршрута
+        directions.calculate { response, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            guard let response = response else {
+                self.mapManager.showAlert(title: "Error", message: "Directions is not available")
+                return
+            }
+            // response содержит в себе массив маршрутов routes
+            // так как мы запросили и альтернативные маршруты
+            for route in response.routes {
+                // создаем геометрическое наложение маршрута
+                self.mapView.addOverlay(route.polyline)
+                // определяем зону видимости карты, чтобы весь маршрут умещался на экране
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                // доболнительная информация, расстояние и время в пути
+                let distance = String(format: "%.1f", route.distance / 1000)
+                let time = String(format: "%.0f", route.expectedTravelTime / 60)
+                print("Расстояние до места: \(distance) км.")
+                print("Время в пути составит: \(time) минут.")
+                self.routeInformation.isHidden = false
+                self.routeInformation.text = "Расстояние до места: \(distance) км. \n Время в пути составит: \(time) минут."
+            }
+        }
+    }
+    
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -96,6 +145,7 @@ extension MapViewController: MKMapViewDelegate {
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
             annotationView?.canShowCallout = true
         }
+        
         // image for our banner
         if let imageDate = place.imageData {
             let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50 ))

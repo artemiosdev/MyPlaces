@@ -20,6 +20,7 @@ class MapManager {
         // отвечает за преобразование гео координат и названий
         // будет преобразовывать адрес из location в гео координаты
         let geocoder = CLGeocoder()
+        
         // получаем метку/метки
         geocoder.geocodeAddressString(location) { placemarks, error in
             if let error = error {
@@ -108,52 +109,6 @@ class MapManager {
         }
     }
     
-    func getDirections(for mapView: MKMapView, previousLocation: (CLLocation) -> ()) {
-        guard let location = locationManager.location?.coordinate else {
-            showAlert(title: "Error", message: "Current location is not found")
-            return
-        }
-        // включим режим постоянного отслеживания пользователя
-        // после того как оно уже определено
-        locationManager.startUpdatingLocation()
-        previousLocation(CLLocation(latitude: location.latitude, longitude: location.longitude))
-        
-        guard let request = createDirectionsRequest(from: location) else {
-            showAlert(title: "Error", message: "Destination is not found")
-            return
-        }
-        let directions = MKDirections(request: request)
-        
-        // убираем старые маршруты
-        resetMapView(withNew: directions, mapView: mapView)
-        
-        // создаем новый маршрут
-        // расчёт маршрута
-        directions.calculate { response, error in
-            if let error = error {
-                print(error)
-                return
-            }
-            guard let response = response else {
-                self.showAlert(title: "Error", message: "Directions is not available")
-                return
-            }
-            // response содержит в себе массив маршрутов routes
-            // так как мы запросили и альтернативные маршруты
-            for route in response.routes {
-                // создаем геометрическое наложение маршрута
-                mapView.addOverlay(route.polyline)
-                // определяем зону видимости карты, чтобы весь маршрут умещался на экране
-                mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-                // доболнительная информация, расстояние и время в пути
-//                let distance = String(format: "%.1f", route.distance / 1000)
-//                let timeInterval = String(format: "%.0f", route.expectedTravelTime / 60)
-//                self.mapViewController.routeInformation.isHidden = false
-//                self.mapViewController.routeInformation.text = "Расстояние до места: \(distance) км. \n Время в пути составит: \(timeInterval) минут."
-            }
-        }
-    }
-    
     func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
         guard let destinationCoordinate = placeCoordinate else { return nil }
         // определяем точки начала и конца маршрута
@@ -175,7 +130,6 @@ class MapManager {
         let center = getCenterLocation(for: mapView)
         guard center.distance(from: location) > 50 else { return }
         closure(center)
-
     }
     
     func resetMapView(withNew directions: MKDirections, mapView: MKMapView ) {
@@ -194,7 +148,7 @@ class MapManager {
         return CLLocation(latitude: latitude, longitude: longitude)
     }
     
-    private func showAlert(title: String, message: String) {
+    func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)

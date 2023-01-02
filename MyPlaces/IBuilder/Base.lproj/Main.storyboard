@@ -17,12 +17,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Ybf-ym-Lp3">
-                                <rect key="frame" x="0.0" y="115" width="390" height="729"/>
+                                <rect key="frame" x="0.0" y="131" width="390" height="713"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <segmentedControl key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="LCe-Hn-U2B">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <segments>
+                                        <segment title="Date"/>
+                                        <segment title="Name"/>
+                                    </segments>
+                                    <color key="selectedSegmentTintColor" systemColor="systemMintColor"/>
+                                    <connections>
+                                        <action selector="sortSelection:" destination="S4Y-pb-EA1" eventType="valueChanged" id="oxP-M4-UyB"/>
+                                    </connections>
+                                </segmentedControl>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="iLp-ow-yxO" customClass="CustomTableViewCell" customModule="MyPlaces" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="120"/>
+                                        <rect key="frame" x="0.0" y="76.666666030883789" width="390" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iLp-ow-yxO" id="amb-hm-Bcy">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="120"/>
@@ -100,25 +113,9 @@
                                     <outlet property="delegate" destination="S4Y-pb-EA1" id="2tQ-5c-Ggq"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LCe-Hn-U2B">
-                                <rect key="frame" x="16" y="142" width="358" height="32"/>
-                                <segments>
-                                    <segment title="Date"/>
-                                    <segment title="Name"/>
-                                </segments>
-                                <color key="selectedSegmentTintColor" systemColor="systemMintColor"/>
-                                <connections>
-                                    <action selector="sortSelection:" destination="S4Y-pb-EA1" eventType="valueChanged" id="oxP-M4-UyB"/>
-                                </connections>
-                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LCq-bu-f5P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="LCq-bu-f5P" firstAttribute="trailing" secondItem="LCe-Hn-U2B" secondAttribute="trailing" constant="16" id="KmG-HD-zGQ"/>
-                            <constraint firstItem="LCe-Hn-U2B" firstAttribute="leading" secondItem="LCq-bu-f5P" secondAttribute="leading" constant="16" id="QQN-al-BCD"/>
-                            <constraint firstItem="LCe-Hn-U2B" firstAttribute="top" secondItem="arX-6p-Clr" secondAttribute="top" constant="142" id="TGw-1D-JsO"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Places" largeTitleDisplayMode="never" id="4H3-sX-3Ac">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="KVr-1N-WV6">
@@ -148,7 +145,7 @@
             <objects>
                 <tableViewController id="WuX-aF-bW3" customClass="NewPlaceViewController" customModule="MyPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="eT4-AK-c2r">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
@@ -251,13 +248,12 @@
                                                         </textField>
                                                     </subviews>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmk-3w-1cP">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pmk-3w-1cP">
                                                     <rect key="frame" x="345" y="46.333333333333336" width="25" height="25.000000000000007"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="6Eb-hQ-nHF"/>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="25" placeholder="YES" id="L7Y-qX-rff"/>
+                                                        <constraint firstAttribute="width" constant="25" id="h9t-Ff-1cR"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="Placeholder"/>
                                                     <connections>
                                                         <segue destination="dLO-Ax-v2J" kind="presentation" identifier="getAddress" id="hx5-dv-PNd"/>
@@ -534,7 +530,7 @@
     </designables>
     <inferredMetricsTieBreakers>
         <segue reference="Nye-xa-RWw"/>
-        <segue reference="7w7-k4-bE6"/>
+        <segue reference="vEa-IJ-sTy"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="AZ" width="25" height="24"/>

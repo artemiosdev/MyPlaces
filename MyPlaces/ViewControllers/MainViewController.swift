@@ -56,20 +56,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if isFiltering {
             return filteredPlaces.count
         }
-        //        return places.isEmpty ? 0 : places.count
         return places.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-        
-        //        var place = Place()
-        //        if isFiltering {
-        //            place = filteredPlaces[indexPath.row]
-        //        } else {
-        //            place = places[indexPath.row]
-        //        }
-        // заменим на ->
         let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
         
         cell.nameLabel.text = place.name
@@ -77,14 +68,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.typeLabel.text = place.type
         cell.imageOfPlace.image = UIImage(data: place.imageData!)
         
-        
         // для нашего Cosmos рейтинга
         cell.cosmosView.rating = place.rating
         return cell
     }
     
     // MARK: - Table View Delegate
-    
     // отменим выделение ячейки
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -108,13 +97,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if segue.identifier == "showDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
             
-            //            let place: Place
-            //            if isFiltering {
-            //                place = filteredPlaces[indexPath.row]
-            //            } else {
-            //                place = places[indexPath.row]
-            //            }
-            //            заменим на ->
             let place = isFiltering ? filteredPlaces[indexPath.row] : places[indexPath.row]
             
             let newPlaceVC = segue.destination as! NewPlaceViewController
@@ -144,6 +126,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         sorting()
     }
+    
     private func sorting() {
         if segmentedControl.selectedSegmentIndex == 0 {
             places = places.sorted(byKeyPath: "date", ascending: ascendingSorting)
